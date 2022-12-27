@@ -19,7 +19,8 @@ const Blog = () => {
   }
 
   if(error !== ''){
-    return <h2>{error}</h2>
+    console.log('ERROR de servidor')
+    return <h2>Post no encontrado</h2>
   }
   
   const handleChange = e => {
@@ -34,22 +35,22 @@ const Blog = () => {
   }
   
   
-  return (
+  return ( 
     <div>
       <h2>Blog</h2>
       
       <input
         type="text"
         className="form-control mb-2" 
-        value={searchParams.get('filtro') || ''} //el value para hacer busquedas en tiempo real
+        value={searchParams.get('filtro') || ''} //el value para hacer busquedas en tiempo real; en caso de que no exista el filter, mandar un string vacio
         onChange={handleChange}
         placeholder="buscar post"
       />
 
       {
           data.filter(item => {
-            let filtro = searchParams.get('filtro') //almecenammos el valor del filtro en el query del browser, tiìado por el usuario
-          if(!filtro) return true
+            let filtro = searchParams.get('filtro') //almecenammos el valor del filtro en el query del browser (un array), tipìado por el usuario
+          if(!filtro) return true//en caso de que no existe el rsultado tipiado por el usuario en el input, devolvemos el current actual y continua con la siguiente vuelta
 
           let title = item.title.toLowerCase()
           return title.startsWith(filtro.toLowerCase()) //esto devuelve un true o un false

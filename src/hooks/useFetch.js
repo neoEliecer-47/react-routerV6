@@ -14,9 +14,9 @@ export const useFetch = (url) => {
         .then((res) => res.json())
         .then(data => setData(data))
         .catch(e => setError('Error del servidor'))
-        .finally(() => setLoading(false)) //cuando termina la peticion al servidor el estado cambia a false
+        .finally(() => setLoading(false)) //cuando termina la peticion al servidor el estado cambia a false, haya o no hayan errores, el finally se ejecuta 
 
-    }, [url])
+    }, [url]) //cada vez que cambie la url se hara nuevamente el useEffeect ya que estara pendiente del cambio de la url
     
     return {data, error, loading}
 }
